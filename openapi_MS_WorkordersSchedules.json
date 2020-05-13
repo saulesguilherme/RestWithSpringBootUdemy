@@ -1,0 +1,841 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "MS WorkOrders Schedules",
+    "description": "<table><thead><tr><th>Version</th><th>Author</th><th>Data</th><th>Changes</th></tr></thead><tbody><tr><td>1.0</td><td>Felipe Tanabe</td><td>2020-04-23</td><td>[Habilitadores e-Care] Initial Version</td></tr><tr><td>1.1</td><td>Felipe Tanabe</td><td>2020-04-28</td><td>[Habilitadores e-Care] API only parameters removed</td></tr><tr><td>2.0</td><td>Bruno Rolim Mansur</td><td>2020-04-28</td><td>[Habilitadores e-Care] Created PUT operation.</td></tr></tbody> </table>",
+    "x-claro-history": "<table><thead><tr><th>Version</th><th>Author</th><th>Data</th><th>Changes</th></tr></thead><tbody><tr><td>1.0</td><td>Felipe Tanabe</td><td>2020-04-23</td><td>[Habilitadores e-Care] Initial Version</td></tr><tr><td>1.1</td><td>Felipe Tanabe</td><td>2020-04-28</td><td>[Habilitadores e-Care] API only parameters removed</td></tr><tr><td>2.0</td><td>Bruno Rolim Mansur</td><td>2020-04-28</td><td>[Habilitadores e-Care] Created PUT operation.</td></tr></tbody> </table>",
+    "version": "1;2020-04-23",
+    "contact": {
+      "name": "Felipe Tanabe"
+    },
+    "x-claro-domains": [
+      "Workforce",
+      "Service Ordering"
+    ]
+  },
+  "security": [
+    {
+      "BasicAuth": []
+    }
+  ],
+  "paths": {
+    "/workorders/schedules": {
+      "delete": {
+        "summary": "Deletes a work order schedule. Backends: MS workorders, SOA NET  (AgendaOS11v1, BloqueioAgenda12V1), WLI NET (CancelarVisitaTecnica)",
+        "x-claro-backends": [
+          "MS workorders",
+          "SOA NET AgendaOS11v1",
+          "SOA NET BloqueioAgenda12v1",
+          "WLI NET CancelarVisitaTecnica"
+        ],
+        "tags": [
+          "workordersSchedules"
+        ],
+        "parameters": [
+          {
+            "name": "X-Code-Application-Origin",
+            "in": "header",
+            "description": "Source application code.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "URA"
+          },
+          {
+            "name": "X-TransactionId",
+            "in": "header",
+            "description": "Correlation identification code.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Id-c104605e2a1f45f425a11626"
+          },
+          {
+            "name": "X-Address-Application-Origin",
+            "in": "header",
+            "description": "Host application origin.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "127.0.0.1"
+          },
+          {
+            "name": "X-User-Id-Origin",
+            "in": "header",
+            "description": "User identification origin.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "user@claro.com.br"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/deleteWorkordersSchedulesRequest"
+              }
+            }
+          },
+          "description": "Request body for deleting a work order schedule.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Business object containing the data returned by the API if exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workordersSchedulesResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/workordersSchedulesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "406": {
+            "$ref": "#/components/responses/406"
+          },
+          "413": {
+            "$ref": "#/components/responses/413"
+          },
+          "414": {
+            "$ref": "#/components/responses/414"
+          },
+          "422": {
+            "$ref": "#/components/responses/422-DELETE"
+          },
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "451": {
+            "$ref": "#/components/responses/451"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      },
+      "put": {
+        "summary": "Reschedule a work order. Backends: MS workorders, SOA NET  (AgendaOS11v1, BloqueioAgenda12V1)",
+        "x-claro-backends": [
+          "MS workorders",
+          "SOA NET AgendaOS11v1",
+          "SOA NET BloqueioAgenda12v1"
+        ],
+        "tags": [
+          "workordersSchedules"
+        ],
+        "parameters": [
+          {
+            "name": "X-Code-Application-Origin",
+            "in": "header",
+            "description": "Source application code.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "URA"
+          },
+          {
+            "name": "X-TransactionId",
+            "in": "header",
+            "description": "Correlation identification code.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Id-c104605e2a1f45f425a11626"
+          },
+          {
+            "name": "X-Address-Application-Origin",
+            "in": "header",
+            "description": "Host application origin.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "127.0.0.1"
+          },
+          {
+            "name": "X-User-Id-Origin",
+            "in": "header",
+            "description": "User identification origin.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "user@claro.com.br"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/putWorkordersSchedulesRequest"
+              }
+            }
+          },
+          "description": "Request body for rescheduling a work order.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Business object containing the data returned by the API if exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/workordersSchedulesResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/workordersSchedulesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "405": {
+            "$ref": "#/components/responses/405"
+          },
+          "406": {
+            "$ref": "#/components/responses/406"
+          },
+          "413": {
+            "$ref": "#/components/responses/413"
+          },
+          "414": {
+            "$ref": "#/components/responses/414"
+          },
+          "422": {
+            "$ref": "#/components/responses/422-PUT"
+          },
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "451": {
+            "$ref": "#/components/responses/451"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://atendimento-dev.claro.com.br/workorders-service",
+      "description": "Desenvolvimento"
+    },
+    {
+      "url": "https://atendimento-hom.claro.com.br/workorders-service",
+      "description": "Testes"
+    },
+    {
+      "url": "https://atendimento-prod.claro.com.br/workorders-service",
+      "description": "Produção"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BasicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "deleteWorkordersSchedulesRequest": {
+        "description": "Business object containing the data to be changed",
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/deleteWorkordersSchedulesRequestObj"
+          }
+        }
+      },
+      "deleteWorkordersSchedulesRequestObj": {
+        "description": "Business object",
+        "type": "object",
+        "required": [
+          "cityId",
+          "customerAccountId",
+          "requestId",
+          "workorderId",
+          "schedule",
+          "sourceEvent",
+          "reason",
+          "contactName"
+        ],
+        "properties": {
+          "cityId": {
+            "$ref": "#/components/schemas/cityIdObj"
+          },
+          "customerAccountId": {
+            "$ref": "#/components/schemas/customerAccountIdObj"
+          },
+          "requestId": {
+            "$ref": "#/components/schemas/requestIdObj"
+          },
+          "workorderId": {
+            "$ref": "#/components/schemas/workorderIdObj"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/scheduleObj"
+          },
+          "sourceEvent": {
+            "$ref": "#/components/schemas/sourceEventObj"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/reasonObj"
+          },
+          "contactName": {
+            "$ref": "#/components/schemas/contactNameObj"
+          },
+          "contactPhone": {
+            "$ref": "#/components/schemas/contactPhoneObj"
+          },
+          "protocolNumber": {
+            "$ref": "#/components/schemas/protocolNumberObj"
+          },
+          "interactionNumber": {
+            "$ref": "#/components/schemas/interactionNumberObj"
+          }
+        }
+      },
+      "putWorkordersSchedulesRequest": {
+        "description": "Business object containing the data to be changed",
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/putWorkordersSchedulesRequestObj"
+          }
+        }
+      },
+      "putWorkordersSchedulesRequestObj": {
+        "description": "Business object",
+        "type": "object",
+        "required": [
+          "cityId",
+          "customerAccountId",
+          "requestId",
+          "workorderId",
+          "schedule",
+          "previousSchedule",
+          "sourceEvent",
+          "reason",
+          "contactName"
+        ],
+        "properties": {
+          "cityId": {
+            "$ref": "#/components/schemas/cityIdObj"
+          },
+          "customerAccountId": {
+            "$ref": "#/components/schemas/customerAccountIdObj"
+          },
+          "requestId": {
+            "$ref": "#/components/schemas/requestIdObj"
+          },
+          "workorderId": {
+            "$ref": "#/components/schemas/workorderIdObj"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/scheduleObj"
+          },
+          "previousSchedule": {
+            "$ref": "#/components/schemas/previousScheduleObj"
+          },
+          "sourceEvent": {
+            "$ref": "#/components/schemas/sourceEventObj"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/reasonObj"
+          },
+          "contactName": {
+            "$ref": "#/components/schemas/contactNameObj"
+          },
+          "contactPhone": {
+            "$ref": "#/components/schemas/contactPhoneObj"
+          },
+          "protocolNumber": {
+            "$ref": "#/components/schemas/protocolNumberObj"
+          },
+          "interactionNumber": {
+            "$ref": "#/components/schemas/interactionNumberObj"
+          }
+        }
+      },
+      "cityIdObj": {
+        "type": "string",
+        "description": "contract city code associated with this request",
+        "example": "05776"
+      },
+      "customerAccountIdObj": {
+        "type": "string",
+        "description": "Subscriber account identification, compose by the operator code and the contract number (12 digits).",
+        "pattern": "^\\d{12}$",
+        "example": "003123456789"
+      },
+      "requestIdObj": {
+        "type": "string",
+        "description": "Request Identification (SOLIC_ID).",
+        "example": "430678862"
+      },
+      "workorderIdObj": {
+        "type": "string",
+        "description": "Workorder identification code (COD_OS).",
+        "example": "0984023405776"
+      },
+      "scheduleObj": {
+        "description": "Workorder schedule. This is the current schedule when cancelling (DELETE), or the new schedule when creating (POST) or updating (PUT).",
+        "type": "object",
+        "required": [
+          "date",
+          "periodTypeId"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Workorder scheduled date. (Format YYYY-MM-DD)",
+            "example": "2020-01-14"
+          },
+          "periodTypeId": {
+            "type": "integer",
+            "description": "Workorder schedule period type (ID_TIPO_PERIODO)",
+            "example": 99
+          }
+        }
+      },
+      "previousScheduleObj": {
+        "description": "Previous workorder schedule. This parameter is required when rescheduling the workorder, and contains que current scheduled date to be rescheduled.",
+        "type": "object",
+        "required": [
+          "date",
+          "periodTypeId"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Workorder scheduled date. (Format YYYY-MM-DD)",
+            "example": "2020-01-14"
+          },
+          "periodTypeId": {
+            "type": "integer",
+            "description": "Workorder schedule period type (ID_TIPO_PERIODO)",
+            "example": 99
+          }
+        }
+      },
+      "sourceEventObj": {
+        "type": "string",
+        "description": "Source event that originated this action.",
+        "example": "ATENDIMENTO ELETRONICO"
+      },
+      "reasonObj": {
+        "type": "string",
+        "description": "Workorder schedule action reason.",
+        "example": "DESISTENCIA_DA_ASSINATURA"
+      },
+      "contactNameObj": {
+        "type": "string",
+        "description": "Contact name.",
+        "example": "SITE_NET"
+      },
+      "contactPhoneObj": {
+        "type": "string",
+        "description": "Phone.",
+        "example": 11964528765
+      },
+      "protocolNumberObj": {
+        "type": "string",
+        "description": "Protocol number.",
+        "example": "004183054791033"
+      },
+      "interactionNumberObj": {
+        "type": "string",
+        "description": "Interaction number (NUM_CHAMADA)",
+        "example": 322722347
+      },
+      "workordersSchedulesResponse": {
+        "description": "Business object containing the data returned by the API if exist.",
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/workordersSchedulesResponseObj"
+          }
+        }
+      },
+      "workordersSchedulesResponseObj": {
+        "description": "Business object",
+        "type": "object",
+        "properties": {
+          "occurrenceId": {
+            "type": "string",
+            "description": "Occurrence number. (OCORRENCIA)",
+            "example": "004183054791033"
+          },
+          "attendanceNumber": {
+            "type": "string",
+            "description": "Attendance number (NUM_ATENDIMENTO)",
+            "example": 322722347
+          }
+        }
+      },
+      "error": {
+        "description": "Object returned in the event of an error (4xx/5xx)",
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "httpCode": {
+                "type": "string",
+                "description": "Error code HTTP"
+              },
+              "errorCode": {
+                "type": "string",
+                "description": "Internal API error code. Ex.: API-3566. This code can be used by consumer to map its error message."
+              },
+              "message": {
+                "type": "string",
+                "description": "Error Message."
+              },
+              "detailedMessage": {
+                "type": "string",
+                "description": "Detailed error message."
+              },
+              "link": {
+                "type": "object",
+                "description": "Object containing page link to errors detailed documentation on API Portal.",
+                "properties": {
+                  "rel": {
+                    "type": "string",
+                    "enum": [
+                      "related"
+                    ],
+                    "description": "To reference the API portal error page is used the “related” semantics in this scenario."
+                  },
+                  "href": {
+                    "type": "string",
+                    "description": "Resource URL"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "xml"
+        }
+      }
+    },
+    "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "400",
+                "errorCode": "API-WORKORDERS-SCHEDULES-400",
+                "message": "Bad Request",
+                "detailedMessage": "Invalid Request for operation."
+              }
+            }
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "401",
+                "errorCode": "API-WORKORDERS-SCHEDULES-401",
+                "message": "Unauthorized",
+                "detailedMessage": "Unauthorized user."
+              }
+            }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "403",
+                "errorCode": "API-WORKORDERS-SCHEDULES-403",
+                "message": "Forbidden",
+                "detailedMessage": "Access denied."
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "404",
+                "errorCode": "API-WORKORDERS-SCHEDULES-404",
+                "message": "Not found",
+                "detailedMessage": "Resource not found."
+              }
+            }
+          }
+        }
+      },
+      "405": {
+        "description": "Method Not Allowed",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "405",
+                "errorCode": "API-WORKORDERS-SCHEDULES-405",
+                "message": "Method Not Allowed",
+                "detailedMessage": "Unavailable HTTP method."
+              }
+            }
+          }
+        }
+      },
+      "406": {
+        "description": "Not Acceptable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "406",
+                "errorCode": "API-WORKORDERS-SCHEDULES-406",
+                "message": "Request Not Acceptable",
+                "detailedMessage": "Requested content type not acceptable."
+              }
+            }
+          }
+        }
+      },
+      "413": {
+        "description": "Payload too large",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "413",
+                "errorCode": "API-WORKORDERS-SCHEDULES-413",
+                "message": "Payload too large",
+                "detailedMessage": "Payload too large."
+              }
+            }
+          }
+        }
+      },
+      "414": {
+        "description": "URI too long",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "414",
+                "errorCode": "API-WORKORDERS-SCHEDULES-414",
+                "message": "URI too long",
+                "detailedMessage": "URI too long."
+              }
+            }
+          }
+        }
+      },
+      "429": {
+        "description": "Too Many Requests",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "429",
+                "errorCode": "API-WORKORDERS-SCHEDULES-429",
+                "message": "Too Many Requests",
+                "detailedMessage": "Consumer requests exceeded policies."
+              }
+            }
+          }
+        }
+      },
+      "451": {
+        "description": "Unavailable For Legal Reasons",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "451",
+                "errorCode": "API-WORKORDERS-SCHEDULES-451",
+                "message": "Unavailable For Legal Reasons",
+                "detailedMessage": "Unavailable For Legal Reasons."
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "500",
+                "errorCode": "API-WORKORDERS-SCHEDULES-500",
+                "message": "Internal Server Error",
+                "detailedMessage": "Internal Server Error."
+              }
+            }
+          }
+        }
+      },
+      "503": {
+        "description": "Service unavailable",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "503",
+                "errorCode": "API-WORKORDERS-SCHEDULES-503",
+                "message": "Service Unavailable",
+                "detailedMessage": "Service Unavailable."
+              }
+            }
+          }
+        }
+      },
+      "422-DELETE": {
+        "description": "Unprocessable Entity - Identify business errors that can be detailed according to backend system rules.<BR> The possible values are:<BR> <UL> <LI>API-WORKORDERS-SCHEDULES-001: This workorder schedule cannot be deleted, because it is blocked and its TYPE is not eligible to be unblocked.<BR> <LI>API-WORKORDERS-SCHEDULES-002: This workorder schedule cannot be deleted, because it is blocked and its STATUS is not eligible to be unblocked.<BR>  </UL>",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "422",
+                "errorCode": "API-WORKORDERS-SCHEDULES-001",
+                "message": "This workorder schedule cannot be deleted, because it is blocked and its TYPE is not eligible to be unblocked.",
+                "detailedMessage": "Business fault occurred."
+              }
+            }
+          }
+        }
+      },
+      "422-PUT": {
+        "description": "Unprocessable Entity - Identify business errors that can be detailed according to backend system rules.<BR> The possible values are:<BR> <UL> <LI>API-WORKORDERS-SCHEDULES-001: This workorder schedule cannot be deleted, because it is blocked and its TYPE is not eligible to be unblocked.<BR> <LI>API-WORKORDERS-SCHEDULES-002: This workorder schedule cannot be deleted, because it is blocked and its STATUS is not eligible to be unblocked.<BR><LI>API-WORKORDERS-SCHEDULES-003: The selected date is blocked and is not available for scheduling.<BR><LI>API-WORKORDERS-SCHEDULES-004: It is not possible to schedule this workorder. The workorder class is incorrect.<BR>  </UL>",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/error"
+            },
+            "example": {
+              "error": {
+                "httpCode": "422",
+                "errorCode": "API-WORKORDERS-SCHEDULES-001",
+                "message": "This workorder schedule cannot be deleted, because it is blocked and its TYPE is not eligible to be unblocked.",
+                "detailedMessage": "Business fault occurred."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
